@@ -168,25 +168,28 @@ void taskSensores(void * parameter){
       valorCorrente2 = 0;
       valorCorrente3 = 0;
       
-      for(int i = 0; i < 500; i++){
+      for(int i = 0; i < 168; i++){
         
-        auxCorrente = adc1_get_raw(ADC1_CHANNEL_4);
-        if(valorCorrente1 < auxCorrente){
-          valorCorrente1 = auxCorrente;
-        }
+        valorCorrente1 += adc1_get_raw(ADC1_CHANNEL_4);
+//        if(valorCorrente1 < auxCorrente){
+//          valorCorrente1 = auxCorrente;
+//        }
       
-        auxCorrente = adc1_get_raw(ADC1_CHANNEL_5);
-        if(valorCorrente2 < auxCorrente){
-          valorCorrente2 = auxCorrente;
-        }
+        valorCorrente2 += adc1_get_raw(ADC1_CHANNEL_5);
+//        if(valorCorrente2 < auxCorrente){
+//          valorCorrente2 = auxCorrente;
+//        }
       
-        auxCorrente = adc1_get_raw(ADC1_CHANNEL_6);
-        if(valorCorrente3 < auxCorrente){
-          valorCorrente3 = auxCorrente;
-        }
+        valorCorrente3 += adc1_get_raw(ADC1_CHANNEL_6);
+//        if(valorCorrente3 < auxCorrente){
+//          valorCorrente3 = auxCorrente;
+//        }
         delayMicroseconds(3);
 
      }
+      valorCorrente1 = sqrt(valorCorrente1/168);
+      valorCorrente2 = sqrt(valorCorrente2/168);
+      valorCorrente3 = sqrt(valorCorrente3/168);
 
       Serial.println("");
       Serial.print("Sensor C1: ");
